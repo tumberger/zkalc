@@ -46,49 +46,49 @@ const operations = [
   {
     label: "G1 MSM",
     value: "msm_G1",
-    description: "Multiscalar multiplication over G1",
+    description: function(size) { return `Multiscalar multiplication over G1 of size ${size}`; },
     tooltip: "A linear combination of points and scalars in the G1 group",
   },
   {
     label: "G2 MSM",
     value: "msm_G2",
-    description: "Multiscalar multiplication over G2",
+    description: function(size) { return `Multiscalar multiplication over G2 of size ${size}`; },
     tooltip: "A linear combination of points and scalars in the G2 group",
   },
   {
     label: "Pairing",
     value: "pairing",
-    description: "Pairing(s)",
+    description: function(size) { return `${size} pairing(s)`; },
     tooltip: "Computation of n pairings",
   },
   {
     label: "Pairing product",
     value: "pairing_product",
-    description: "Pairing product",
+    description: function(size) { return `Pairing procuct of size ${size}`; },
     tooltip: "A product of n pairings",
   },
   {
     label: "Field Addition",
     value: "add_ff",
-    description: "Field addition(s)",
+    description: function(size) { return `${size} field addition(s)`; },
     tooltip: "Addition of n elements on the field",
   },
   {
     label: "Field Multiplication",
     value: "mul",
-    description: "Field multiplication(s)",
+    description: function(size) { return `${size} field multiplication(s)`; },
     tooltip: "Multiplication of n elements on the field",
   },
   {
     label: "Field Inversion",
     value: "invert",
-    description: "Field inversion(s)",
+    description: function(size) { return `${size} field inversion(s)`; },
     tooltip: "Inversion of n elements on the field",
   },
   {
     label: "Curve Addition",
     value: "add_ec",
-    description: "Elliptic curve G1 additions",
+    description: function(size) { return `${size} elliptic curve G1 additions`; },
     tooltip: "Addition of two elements in the G1 group",
   },
 ];
@@ -203,6 +203,7 @@ function App() {
       return formula.toTex() + "\\approx" + evaluation;
     }
   };
+
 
   const handleLibChange = (e) => {
     // UX choice: make it easy to see differences between implementations
@@ -330,10 +331,9 @@ function App() {
             renderItem={(ingredient, index) => (
               <List.Item key={index}>
                 <Col span={10}>
-                  <InlineMath>{renderFormula(ingredient.quantity)}</InlineMath>
                   &nbsp;&nbsp;&nbsp;&nbsp;
                   <Tooltip title={operations.filter((x) => x.value === ingredient.op)[0].tooltip}>
-                  {operations.filter((x) => x.value === ingredient.op)[0].description}
+                      {operations.filter((x) => x.value === ingredient.op)[0].description(ingredient.quantity)}
                   </Tooltip>
                 </Col>
                 <Col span={10} align="right">
