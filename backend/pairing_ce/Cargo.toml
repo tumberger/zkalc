@@ -20,5 +20,6 @@ rayon = "1.5"
 criterion = "0.3.5"
 group = "0.12.0"
 ff_ce = "0.14.3"
-bellman_ce = "0.3.5"
+# specify the repository and branch for the bellman_ce dependency
+bellman_ce = { git = "https://github.com/tumberger/bellman-ce", branch = "dev" }
 futures = "0.3.28"
