@@ -135,20 +135,20 @@ fn bench_pairing<P: pairing_ce::Engine, M: Measurement>(c: &mut BenchmarkGroup<'
 
 fn bench_bls12_381(c: &mut Criterion) {
     let mut group = c.benchmark_group("bls12_381");
-    // bench_add_ff::<pairing_ce::bls12_381::fr::Fr, _>(&mut group);
-    // bench_mul_ff::<pairing_ce::bls12_381::fr::Fr, _>(&mut group);
-    // bench_add_ec::<pairing_ce::bls12_381::G1, _>(&mut group);
-    // bench_mul_ec::<pairing_ce::bls12_381::G1, _>(&mut group);
+    bench_add_ff::<pairing_ce::bls12_381::fr::Fr, _>(&mut group);
+    bench_mul_ff::<pairing_ce::bls12_381::fr::Fr, _>(&mut group);
+    bench_add_ec::<pairing_ce::bls12_381::G1, _>(&mut group);
+    bench_mul_ec::<pairing_ce::bls12_381::G1, _>(&mut group);
     bench_msm::<Bls12>(&mut group);
     bench_pairing::<Bls12, _>(&mut group);
 }
 
 fn bench_bn256(c: &mut Criterion) {
     let mut group = c.benchmark_group("bn256");
-    // bench_add_ff::<pairing_ce::bn256::fr::Fr, _>(&mut group);
-    // bench_mul_ff::<pairing_ce::bn256::fr::Fr,_>(&mut group);
-    // bench_add_ec::<pairing_ce::bn256::G1, _>(&mut group);
-    // bench_mul_ec::<pairing_ce::bn256::G1, _>(&mut group);
+    bench_add_ff::<pairing_ce::bn256::fr::Fr, _>(&mut group);
+    bench_mul_ff::<pairing_ce::bn256::fr::Fr,_>(&mut group);
+    bench_add_ec::<pairing_ce::bn256::G1, _>(&mut group);
+    bench_mul_ec::<pairing_ce::bn256::G1, _>(&mut group);
     bench_msm::<Bn256>(&mut group);
     bench_pairing::<Bn256, _>(&mut group);
 }
